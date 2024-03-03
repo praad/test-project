@@ -33,7 +33,8 @@ cache-clear: ## Clear Symfony cache
 	docker compose exec php bin/console cache:clear
 
 check:
-	vendor/bin/phpstan analyse src tests
+	docker compose exec php vendor/bin/phpstan clear-result-cache
+	docker compose exec php vendor/bin/phpstan analyse src tests
 
 test: ## Run tests
 	docker compose exec php bin/phpunit --testdox tests/
