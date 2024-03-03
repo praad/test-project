@@ -6,12 +6,11 @@ build:      ## Build
 	docker compose up --build -d
 	docker compose exec php composer install
 	docker compose exec php bin/console lexik:jwt:generate-keypair --overwrite
-	docker compose exec php bin/console doctrine:database:create --env=dev --if-not-exists
-	docker compose exec php bin/console doctrine:schema:create --env=dev
-	docker compose exec php bin/console doctrine:fixtures:load --env=dev --purge-with-truncate
-	docker compose exec php bin/console doctrine:schema:create --env=test
+	docker compose exec php bin/console doctrine:database:create --if-not-exists
+	docker compose exec php bin/console doctrine:schema:create
 	docker compose exec php bin/console doctrine:database:create --env=test --if-not-exists
-	docker compose exec php bin/console doctrine:fixtures:load --env=test --purge-with-truncate
+	docker compose exec php bin/console doctrine:schema:create --env=test
+	docker compose exec php bin/console doctrine:fixtures:load --env=dev --purge-with-truncate
 	docker compose exec php bin/console cache:clear
 
 up:      ## Start all containers

@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserMapperTest extends WebTestCase
 {
-    public function testMap(): void
+    public function testUserMapper(): void
     {
         $container = static::getContainer();
         $autoMapper = $container->get(AutoMapperInterface::class);

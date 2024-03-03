@@ -3,17 +3,18 @@ version: "3.8"
 services:
     db:
         image: mysql:latest
+        restart: always
         command: --default-authentication-plugin=mysql_native_password
         volumes:
             - symfony_db:/var/lib/mysql
-            - /db/db-init.sql:/docker-entrypoint-initdb.d/:rw
+            - ./db/db-init.sql:/docker-entrypoint-initdb.d/db-init.sql
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         ports:
-            - 3306:3306
+            - "3306:3306"
         networks:
             - symfony_app
 
@@ -27,6 +28,10 @@ services:
             - symfony_app_log:/var/logs
         networks:
             - symfony_app
+        restart: always
+        depends_on:
+            - db
+
     nginx:
         build:
             context: ./nginx
@@ -36,15 +41,16 @@ services:
             - symfony_app_vendor:/var/www/symfony/vendor
             - symfony_app_log:/var/logs
         ports:
-            - 8000:80
+            - "8000:80"
         networks:
             - symfony_app
+        restart: always
 
     adminer:
         image: adminer
         restart: always
         ports:
-            - 8003:8080
+            - "8003:8080"
         networks:
             - symfony_app
 
@@ -54,7 +60,7 @@ services:
             - DOZZLE_LEVEL=info
             - DOZZLE_NO_ANALYTICS=true
         ports:
-            - 8002:8080
+            - "8002:8080"
         networks:
             - symfony_app
         volumes:
@@ -65,22 +71,15 @@ services:
             timeout: 3s
             retries: 3
             start_period: 1s
+        restart: always
 
     swagger:
         image: swaggerapi/swagger-ui
         environment:
             - API_URL=http://localhost:8000/api/doc.json
         ports:
-            - 8001:8080
-
-    logviewer:
-        image: pierrecdn/phpipam
-        volumes:
-            -  symfony_app_log:/var/logs
-        ports:
-            - 8004:8080
-        networks:
-            - symfony_app
+            - "8001:8080"
+        restart: always
 
 volumes:
     symfony_app_var:
