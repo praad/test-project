@@ -2,7 +2,7 @@ SHELL = /bin/bash
 
 .PHONY: up down restart composer_install console cache-clear
 
-build:      ## Build
+build:      ## Build the application
 	docker compose up --build -d
 	docker compose exec php composer install
 	docker compose exec php bin/console lexik:jwt:generate-keypair --overwrite
@@ -32,11 +32,11 @@ console: ## Open Symfony console
 cache-clear: ## Clear Symfony cache
 	docker compose exec php bin/console cache:clear
 
-check:
+check: ## Run phpstan static code analyzer
 	docker compose exec php vendor/bin/phpstan clear-result-cache
 	docker compose exec php vendor/bin/phpstan analyse src tests
 
-test: ## Run tests
+test: ## Run all tests
 	docker compose exec php bin/phpunit --testdox tests/
 
 clear-containers: ## Delete all docker containers
