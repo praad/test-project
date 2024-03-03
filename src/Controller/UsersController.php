@@ -52,7 +52,7 @@ class UsersController extends AbstractController
         UserRepository $userRepository,
         AutoMapperInterface $autoMapper
     ): JsonResponse {
-        $user = $autoMapper->map($userRepository->findOneById((int) $id), UserDto::class);
+        $user = $autoMapper->map($userRepository->findOneById((int)$id), UserDto::class);
 
         if (!$user) {
             throw new ResourceNotFoundException(sprintf(self::ERROR_USER_NOT_FOUND, $id));

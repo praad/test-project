@@ -15,7 +15,6 @@ use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Exception\ValidationFailedException;
 use Throwable;
-use TypeError;
 
 #[WithMonologChannel('app')]
 readonly class ExceptionResponseBuilder
