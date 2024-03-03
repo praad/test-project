@@ -1,6 +1,6 @@
 SHELL = /bin/bash
 
-.PHONY: up down restart composer_install console cache-clear
+.PHONY: up down restart composer-install console cache-clear
 
 build:      ## Build the application
 	docker compose up --build -d
@@ -23,7 +23,7 @@ restart: ## Restart all containers
 	make down
 	make up
 
-composer_install: ## Install Composer dependencies
+composer-install: ## Install Composer dependencies
 	docker compose exec php composer install
 
 console: ## Open Symfony console
