@@ -18,4 +18,5 @@ abstract class BaseResponse
         $this->success = $success;
         return $this;
     }
+
 }

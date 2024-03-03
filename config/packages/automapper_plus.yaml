@@ -1,0 +1,9 @@
+auto_mapper_plus:
+  options:
+    # These options are example values, and not necessarily the default
+    # ones. If an option is not provided, the base library's default will
+    # be used.
+    create_unregistered_mappings: true
+    skip_constructor: true
+    use_substitution: true
+    ignore_null_properties: false

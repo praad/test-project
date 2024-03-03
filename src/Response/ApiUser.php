@@ -6,7 +6,7 @@ namespace App\Response;
 
 use App\Dto\UserDto;
 
-class ApiUserResponse extends BaseResponse
+class ApiUser extends BaseResponse
 {
     private ?UserDto $user = null;
 

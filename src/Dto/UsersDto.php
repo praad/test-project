@@ -2,25 +2,34 @@
 
 declare(strict_types=1);
 
-namespace App\DTO;
+namespace App\Dto;
 
-use App\Entity\User;
-use BaseDto;
-
-class UserDto extends BaseDto
+class UsersDto extends BaseDto
 {
-    private ?User $user = null;
+    /** @var array<int, UserDto> */
+    private array $users = [];
 
-    public function getUser(): ?User
+    /**
+     * @return array<UserDto>
+     */
+    public function getUsers(): array
     {
-        return $this->user;
+        return $this->users;
     }
 
-    public function setUser(?User $user): UserDto
+    /**
+     * @param array<int, UserDto> $users
+     * @return $this
+     */
+    public function setUsers(array $users): self
     {
-        $this->user = $user;
+        $this->users = $users;
         return $this;
     }
 
-
+    public function addUser(UserDto $userDto): self
+    {
+        $this->users[] = $userDto;
+        return $this;
+    }
 }
