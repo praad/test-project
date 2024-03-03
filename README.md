@@ -1,0 +1,4 @@
+- API: http://localhost:8000
+- Swagger: http://localhost:8001/
+- Dozzle: http://localhost:8002/
+- Adminer: http://localhost:8003/
